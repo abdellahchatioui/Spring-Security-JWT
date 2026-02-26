@@ -1,6 +1,7 @@
 package com.example.springsecurityjwt.controller;
 
 import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,8 +14,8 @@ public class HomeController {
     }
 
     @GetMapping("/session")
-    public String session (HttpServlet http){
-        return "hello";
+    public String session (HttpSession session){
+        return "Session Id : " + session.getId();
     }
 
 }
