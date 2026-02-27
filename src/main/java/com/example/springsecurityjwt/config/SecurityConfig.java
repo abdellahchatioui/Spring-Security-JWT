@@ -14,22 +14,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http){
 
-        // Disable CSRF security
-        http.csrf(customize -> customize.disable());
-        // Authorize Request
-        http.authorizeHttpRequests(
-                request ->
-                        request.anyRequest().authenticated());
 
-        // Show Form Login
-        http.formLogin(Customizer.withDefaults());
-        // Allow postman request
-        http.httpBasic(Customizer.withDefaults());
-        // Session StateLess
-        http.sessionManagement(session ->
-                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        );
-
-        return http.build();
+        return http
+                // Disable CSRF security
+                .csrf(customize -> customize.disable())
+                // Authorize Request
+                .authorizeHttpRequests(
+                        request ->
+                                request.anyRequest().authenticated())
+                // Show Form Login
+                .formLogin(Customizer.withDefaults())
+                // Allow postman request
+                .httpBasic(Customizer.withDefaults())
+                // Session StateLess
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .build();
     }
 }
