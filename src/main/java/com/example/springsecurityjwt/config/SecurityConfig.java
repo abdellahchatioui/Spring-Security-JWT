@@ -18,6 +18,7 @@ public class SecurityConfig {
                 request ->
                         request.anyRequest().authenticated());
         http.formLogin(Customizer.withDefaults());
+        http.httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
