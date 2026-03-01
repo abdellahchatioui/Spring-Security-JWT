@@ -2,7 +2,6 @@ package com.example.springsecurityjwt.service;
 
 import com.example.springsecurityjwt.entity.Student;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 
@@ -10,6 +9,10 @@ import java.util.ArrayList;
 public class StudentService {
 
     ArrayList<Student> students = new ArrayList<>();
+
+    public ArrayList<Student> getStudents(){
+        return students;
+    }
 
     public Student saveStudent(Student student){
         students.add(student);
