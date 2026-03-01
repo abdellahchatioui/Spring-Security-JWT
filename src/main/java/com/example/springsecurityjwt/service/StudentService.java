@@ -9,5 +9,12 @@ import java.util.ArrayList;
 @Service
 public class StudentService {
 
+    ArrayList<Student> students = new ArrayList<>();
+
+
+    public Student saveStudent(Student student){
+        students.add(student);
+        return student;
+    }
 
 }
