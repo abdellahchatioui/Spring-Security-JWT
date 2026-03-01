@@ -14,9 +14,14 @@ public class StudentService {
         return students;
     }
 
+    public Student getStudentsById(Integer id){
+        return students.get(id);
+    }
+
     public Student saveStudent(Student student){
         students.add(student);
         return student;
     }
+
 
 }
