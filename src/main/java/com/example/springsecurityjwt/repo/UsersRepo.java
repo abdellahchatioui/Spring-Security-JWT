@@ -2,7 +2,9 @@ package com.example.springsecurityjwt.repo;
 
 import com.example.springsecurityjwt.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UsersRepo extends JpaRepository<Integer, Users> {
-
+    Users findByUsername(String username);
 }
