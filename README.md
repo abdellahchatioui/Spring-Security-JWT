@@ -1,7 +1,7 @@
 # 🔐 Spring Security JWT Lab
 [![Java](https://img.shields.io/badge/Java-17%2B-orange?logo=java)](https://www.oracle.com/java/)
 [![JWT](https://img.shields.io/badge/Authentication-JWT-black?logo=jsonwebtokens)](https://jwt.io/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?logo=springboot)](https://spring.io/projects/spring-boot)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6.x-brightgreen?logo=springboot)](https://spring.io/projects/spring-boot)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
 
 A reusable Spring Boot authentication template implementing **Spring Security + JWT** with role-based authorization using PostgreSQL.
