@@ -31,7 +31,9 @@ public class SecurityConfig {
                 // Authorize Request
                 .authorizeHttpRequests(
                         request ->
-                                request.anyRequest().authenticated())
+                                request
+                                        .requestMatchers("/auth/register").permitAll()
+                                        .anyRequest().authenticated())
                 // Show Form Login
                 .formLogin(Customizer.withDefaults())
                 // Allow postman request
