@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         request ->
                                 request
-                                        .requestMatchers("/auth/register").permitAll()
+                                        .requestMatchers("/auth/register","/auth/login").permitAll()
                                         .anyRequest().authenticated())
                 // Show Form Login
                 .formLogin(Customizer.withDefaults())
