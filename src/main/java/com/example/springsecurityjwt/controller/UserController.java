@@ -1,5 +1,6 @@
 package com.example.springsecurityjwt.controller;
 
+import com.example.springsecurityjwt.dto.loginRequest;
 import com.example.springsecurityjwt.entity.Users;
 import com.example.springsecurityjwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,4 +20,10 @@ public class UserController {
     public Users register(@RequestBody Users user){
         return userservice.register(user);
     }
+
+    @PostMapping("/login")
+    public String login(@RequestBody loginRequest user){
+        return userservice.verify(user);
+    }
+
 }
