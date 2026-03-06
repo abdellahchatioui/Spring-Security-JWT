@@ -1,18 +1,21 @@
 package com.example.springsecurityjwt.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Users {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String username;
     private String password;
 
-    public Users(Integer id, String username, String password) {
+    public Users(Long  id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -22,11 +25,11 @@ public class Users {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long  id) {
         this.id = id;
     }
 
