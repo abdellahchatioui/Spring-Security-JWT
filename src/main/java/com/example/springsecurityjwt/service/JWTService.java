@@ -1,6 +1,8 @@
 package com.example.springsecurityjwt.service;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -10,6 +12,8 @@ import java.util.Map;
 
 @Service
 public class JWTService {
+
+    private String secretKey = "c0ReBNEqkn5ANbUXS29D90kR1UdtBQNQRbCJnJbRt4s";
     public String generateToken(String username) {
         Map<String,Object> claims = new HashMap<>();
         return Jwts.builder()
@@ -25,7 +29,8 @@ public class JWTService {
     }
 
     private Key getKey() {
-        return null;
+        byte[] KeyBytes = Decoders.BASE64.decode(secretKey);
+        return Keys.hmacShaKeyFor(KeyBytes);
     }
 
 }
