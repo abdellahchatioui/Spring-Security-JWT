@@ -38,7 +38,7 @@ public class UserService {
 
         // System.out.println(user.getUsername());
         if(authentication.isAuthenticated()){
-            return jwtService.generateToken();
+            return jwtService.generateToken(user.getUsername());
         }
         return "Faild";
     }
