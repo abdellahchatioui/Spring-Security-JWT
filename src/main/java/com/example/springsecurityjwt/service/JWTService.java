@@ -41,4 +41,10 @@ public class JWTService {
     public boolean validateToken(String token, UserDetails userDetails) {
         return true;
     }
+
+    private boolean isTokenExpired(String token){
+        return  false;
+    }
+
+
 }
