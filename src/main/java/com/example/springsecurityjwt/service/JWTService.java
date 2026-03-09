@@ -3,6 +3,7 @@ package com.example.springsecurityjwt.service;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -35,5 +36,9 @@ public class JWTService {
 
     public String extractUserName(String token) {
         return "abdellah";
+    }
+
+    public boolean validateToken(String token, UserDetails userDetails) {
+        return true;
     }
 }
