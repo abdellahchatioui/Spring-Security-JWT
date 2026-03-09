@@ -46,5 +46,8 @@ public class JWTService {
         return  false;
     }
 
+    private Date extractExpiration(String token){
+        return null;
+    }
 
 }
