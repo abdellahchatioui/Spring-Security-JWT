@@ -37,7 +37,7 @@ public class JWTService {
     }
 
     public String extractUserName(String token) {
-        return "abdellah";
+        return extractAllClaims(token).getSubject();
     }
 
     private Claims extractAllClaims(String token) {
