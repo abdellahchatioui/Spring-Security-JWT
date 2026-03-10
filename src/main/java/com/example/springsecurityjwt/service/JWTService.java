@@ -37,7 +37,7 @@ public class JWTService {
     }
 
     public String extractUserName(String token) {
-        return "abdellah";
+        return extractAllClaims(token).getSubject();
     }
 
     private Claims extractAllClaims(String token) {
@@ -52,12 +52,14 @@ public class JWTService {
         return true;
     }
 
-    private boolean isTokenExpired(String token){
-        return  false;
+    public Date extractExpiration(String token) {
+        return extractAllClaims(token).getExpiration();
     }
 
-    private Date extractExpiration(String token){
-        return null;
+    private boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
     }
+
+
 
 }
