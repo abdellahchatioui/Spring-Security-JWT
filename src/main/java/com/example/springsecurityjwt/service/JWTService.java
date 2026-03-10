@@ -49,7 +49,10 @@ public class JWTService {
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
-        return true;
+
+        final String username = extractUserName(token);
+
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     public Date extractExpiration(String token) {
