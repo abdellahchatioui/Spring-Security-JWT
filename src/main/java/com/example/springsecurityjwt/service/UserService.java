@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,11 +35,14 @@ public class UserService {
     }
 
     public String verify(loginRequest user) {
-        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
+        Authentication authentication = authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword())
+        );
 
         // System.out.println(user.getUsername());
         if(authentication.isAuthenticated()){
-            return jwtService.generateToken(user.getUsername());
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return jwtService.generateToken(userDetails);
         }
         return "Faild";
     }
