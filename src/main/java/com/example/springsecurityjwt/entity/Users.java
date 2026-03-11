@@ -1,9 +1,6 @@
 package com.example.springsecurityjwt.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Users {
@@ -15,10 +12,14 @@ public class Users {
     private String username;
     private String password;
 
-    public Users(Long  id, String username, String password) {
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public Users(Long  id, String username, String password ,Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     public Users() {
