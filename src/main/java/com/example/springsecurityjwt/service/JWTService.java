@@ -18,16 +18,8 @@ import java.util.Map;
 @Service
 public class JWTService {
 
-    @Autowired
-    MyUserDetailsService myUserDetailsService;
-
-    private final UserService userService;
     private String secretKey = "c0ReBNEqkn5ANbUXS29D90kR1UdtBQNQRbCJnJbRt4s";
 
-    public JWTService(MyUserDetailsService myUserDetailsService, UserService userService) {
-        this.myUserDetailsService = myUserDetailsService;
-        this.userService = userService;
-    }
 
     public String generateToken(UserDetails userDetails) {
         Map<String,Object> claims = new HashMap<>();
