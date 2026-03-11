@@ -1,9 +1,11 @@
 package com.example.springsecurityjwt.service;
 
+import com.example.springsecurityjwt.dto.loginRequest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +18,29 @@ import java.util.Map;
 @Service
 public class JWTService {
 
+    @Autowired
+    MyUserDetailsService myUserDetailsService;
+
+    private final UserService userService;
     private String secretKey = "c0ReBNEqkn5ANbUXS29D90kR1UdtBQNQRbCJnJbRt4s";
-    public String generateToken(String username) {
+
+    public JWTService(MyUserDetailsService myUserDetailsService, UserService userService) {
+        this.myUserDetailsService = myUserDetailsService;
+        this.userService = userService;
+    }
+
+    public String generateToken(UserDetails userDetails) {
         Map<String,Object> claims = new HashMap<>();
+
+        claims.put("role", userDetails.getAuthorities());
+
         return Jwts.builder()
-                .claims()
-                .add(claims)
-                .subject(username)
+                .claims(claims)
+                .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
-                .and()
                 .signWith(getKey())
                 .compact();
-
     }
 
     private Key getKey() {
