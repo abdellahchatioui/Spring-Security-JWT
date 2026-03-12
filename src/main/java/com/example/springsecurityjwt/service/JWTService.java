@@ -6,6 +6,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,9 @@ import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class JWTService {
@@ -23,14 +27,15 @@ public class JWTService {
 
     public String generateToken(UserDetails userDetails) {
         Map<String,Object> claims = new HashMap<>();
-
-        claims.put("role", userDetails.getAuthorities());
+        claims.put("roles", userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList()));
 
         return Jwts.builder()
-                .claims(claims)
-                .subject(userDetails.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+                .setClaims(claims)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getKey())
                 .compact();
     }
@@ -44,6 +49,18 @@ public class JWTService {
         return extractAllClaims(token).getSubject();
     }
 
+    public UserDetails extractUserDetails(String token) {
+        Claims claims = extractAllClaims(token);
+
+        String username = claims.getSubject();
+        List<String> roles = (List<String>) claims.get("roles");
+
+        List<GrantedAuthority> authorities = roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+
+        return new org.springframework.security.core.userdetails.User(username, "", authorities);
+    }
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
                 .verifyWith((SecretKey) getKey())
@@ -53,9 +70,7 @@ public class JWTService {
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
-
         final String username = extractUserName(token);
-
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
