@@ -43,16 +43,13 @@ public class SecurityConfig {
                                 request
                                         .requestMatchers("/auth/register",
                                                 "/auth/login").permitAll()
+                                        .requestMatchers("/student/**").hasRole("ADMIN")
                                         .anyRequest().authenticated())
                 // Show Form Login
                 .formLogin(Customizer.withDefaults())
                 // Allow postman request
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                // Session StateLess
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
                 .build();
     }
 
@@ -70,24 +67,5 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config){
         return config.getAuthenticationManager();
     }
-    /*
-    @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails user1 = User
-                .withDefaultPasswordEncoder()
-                .username("abde")
-                .password("1234")
-                .roles("USER")
-                .build();
-        UserDetails user2 = User
-                .withDefaultPasswordEncoder()
-                .username("med")
-                .password("1234")
-                .roles("ADMIN")
-                .build();
 
-        return new InMemoryUserDetailsManager(user1,user2);
-    }
-
-     */
 }
