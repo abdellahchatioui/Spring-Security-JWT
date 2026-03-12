@@ -42,8 +42,11 @@ public class UserService {
         // System.out.println(user.getUsername());
         if(authentication.isAuthenticated()){
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            // Argument 'userDetails' might be null
+            assert userDetails != null;
             return jwtService.generateToken(userDetails);
         }
         return "Faild";
+
     }
 }
