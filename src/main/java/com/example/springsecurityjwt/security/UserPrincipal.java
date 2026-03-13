@@ -1,5 +1,6 @@
-package com.example.springsecurityjwt.entity;
+package com.example.springsecurityjwt.security;
 
+import com.example.springsecurityjwt.entity.Users;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

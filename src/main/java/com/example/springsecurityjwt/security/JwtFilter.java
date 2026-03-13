@@ -1,6 +1,5 @@
-package com.example.springsecurityjwt.config;
+package com.example.springsecurityjwt.security;
 
-import com.example.springsecurityjwt.service.JWTService;
 import com.example.springsecurityjwt.service.MyUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
