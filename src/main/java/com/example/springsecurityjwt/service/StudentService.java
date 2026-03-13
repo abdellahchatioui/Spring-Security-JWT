@@ -1,25 +1,29 @@
 package com.example.springsecurityjwt.service;
 
 import com.example.springsecurityjwt.entity.Student;
+import com.example.springsecurityjwt.repo.StudentRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
 
-    ArrayList<Student> students = new ArrayList<>();
-
-    public ArrayList<Student> getStudents(){
-        return students;
+    @Autowired
+    StudentRepo studentRepo;
+    public List<Student> getStudents(){
+        return studentRepo.findAll();
     }
 
-    public Student getStudentsById(Integer id){
-        return students.get(id);
+    public Optional<Student> getStudentsById(Long id){
+        return studentRepo.findById(id);
     }
 
     public Student saveStudent(Student student){
-        students.add(student);
+        studentRepo.save(student);;
         return student;
     }
 
