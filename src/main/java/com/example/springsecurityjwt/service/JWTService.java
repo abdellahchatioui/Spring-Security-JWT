@@ -61,6 +61,7 @@ public class JWTService {
 
         return new org.springframework.security.core.userdetails.User(username, "", authorities);
     }
+
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
                 .verifyWith((SecretKey) getKey())
