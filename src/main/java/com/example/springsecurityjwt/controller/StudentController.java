@@ -16,13 +16,15 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+    //@PreAuthorize("hasRole('STUDENT')")
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','STUDENT')")
     public List<Student> getStudents(){
         return studentService.getStudents();
     }
 
-    @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{id}")
     public Optional<Student> getStudentsById(@PathVariable Long id ){
         return studentService.getStudentsById(id);
     }
