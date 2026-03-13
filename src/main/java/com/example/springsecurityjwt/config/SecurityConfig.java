@@ -45,10 +45,8 @@ public class SecurityConfig {
                                                 "/auth/login").permitAll()
                                         //.requestMatchers("/student/**").hasRole("ADMIN")
                                         .anyRequest().authenticated())
-                // Show Form Login
-                .formLogin(Customizer.withDefaults())
-                // Allow postman request
-                .httpBasic(Customizer.withDefaults())
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
