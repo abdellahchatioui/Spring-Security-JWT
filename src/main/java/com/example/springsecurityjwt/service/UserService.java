@@ -3,6 +3,7 @@ package com.example.springsecurityjwt.service;
 import com.example.springsecurityjwt.dto.loginRequest;
 import com.example.springsecurityjwt.entity.Users;
 import com.example.springsecurityjwt.repo.UsersRepo;
+import com.example.springsecurityjwt.security.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class UserService {
