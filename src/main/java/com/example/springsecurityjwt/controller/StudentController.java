@@ -1,5 +1,6 @@
 package com.example.springsecurityjwt.controller;
 
+import com.example.springsecurityjwt.dto.StudentRequest;
 import com.example.springsecurityjwt.entity.Student;
 import com.example.springsecurityjwt.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class StudentController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
-    public Student addStudent(@RequestBody Student student){
-        return studentService.saveStudent(student);
+    public Student addStudent(@RequestBody StudentRequest request){
+        return studentService.saveStudent(request);
     }
 
 }
