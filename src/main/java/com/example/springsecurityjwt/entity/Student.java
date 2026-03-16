@@ -18,8 +18,6 @@ public class Student {
 
     @Column(unique = true, nullable = false)
     private String name;
-
-    @Column(unique = true)
+    @Column(nullable = false)
     private int mark;
-
 }
